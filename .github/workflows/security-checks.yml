@@ -18,7 +18,6 @@ jobs:
         id: detect
         with:
           script: |
-            const core = require("@actions/core")
             const { owner, repo } = context.repo
             const { data: langs } = await github.rest.repos.listLanguages({ owner, repo })
 
@@ -115,7 +114,7 @@ jobs:
           mkdir -p /tmp/clamav
           cat <<'EOF' > /tmp/freshclam.conf
           DatabaseDirectory /tmp/clamav
-          LogFile /tmp/freshclam.log
+          UpdateLogFile /tmp/freshclam.log
           Foreground true
           EOF
           sudo freshclam --config-file=/tmp/freshclam.conf
